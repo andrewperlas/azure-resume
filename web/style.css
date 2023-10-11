@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #101214;
+    color: #7A7C80;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    display: grid;
+    margin: 50px;
+    grid-template-columns: 1fr 2fr;
+    box-shadow: 0 35px 55px rgba(0,0,0,0.1);
+}
+
+.box .left_side {
+    position: relative;
+    background: white;
+    padding: 40px;
+    line-height: 1.5;
+}
+
+.titletext {
+    text-align: center;
+    line-height: 1;
+}
+
+ul {
+    list-style: none;
+}
