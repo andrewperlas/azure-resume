@@ -8,10 +8,8 @@
 body {
     background-color: #101214;
     color: #7A7C80;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    display: block;
+    margin: 8px;
 }
 
 div {
@@ -26,6 +24,7 @@ div {
     left: 0;
     background-color: white;
     text-align: center;
+    box-shadow: 0 35px 55px rgba(0,0,0,0.1);
 }
 
 img {
@@ -52,27 +51,24 @@ img {
     display: block;
 }
 
-.box {
-    position: relative;
-    width: 100%;
-    display: grid;
-    margin: 50px;
-    grid-template-columns: 1fr 2fr;
-    box-shadow: 0 35px 55px rgba(0,0,0,0.1);
+.title {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0px 0px 200px;
+    line-height: 1.2;
+    border-style: solid;
+    border-width: .5px 2px 2px 2px;
+    border-color: lightgray;
+    box-shadow: 0px 1px 1px 0px lightgray;
 }
 
-.box .left_side {
-    position: relative;
-    background: white;
-    padding: 40px;
-    line-height: 1.5;
-}
-
-.titletext {
-    text-align: center;
-    line-height: 1;
-}
-
-ul {
-    list-style: none;
+.section {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0px 0px 200px;
+    line-height: 1.2;
+    border-style: solid;
+    border-width: .5px 2px 2px 2px;
+    border-color: lightgray;
+    box-shadow: 0px 1px 1px 0px lightgray;
 }
