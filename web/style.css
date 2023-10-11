@@ -14,6 +14,44 @@ body {
     min-height: 100vh;
 }
 
+div {
+    display: block;
+}
+
+.sidepanel {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    text-align: center;
+}
+
+img {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.sidepanel img {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #101214;
+    padding: 0%;
+    margin-top: 10%;
+}
+
+.sidepanel a {
+    cursor: pointer;
+    color: #101214;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+}
+
 .box {
     position: relative;
     width: 100%;
