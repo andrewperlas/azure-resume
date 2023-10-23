@@ -37,3 +37,38 @@ resource "azurerm_storage_account" "crcdev-storage" {
     environment = "dev"
   }
 }
+
+resource "azurerm_cdn_profile" "crcdev-cdn-profile" {
+  name                  = "crcdevcdnprofile1"
+  location              = "West US"
+  resource_group_name   = azurerm_resource_group.crcdev-rg.name
+  sku                   = "Standard_Microsoft"
+  tags = {
+    environment = "dev"
+  }
+}
+
+resource "azurerm_cdn_endpoint" "crcdev-cdn-endpoint" {
+  name                  = "crcdevcdnendpoint1"
+  profile_name          = azurerm_cdn_profile.crcdev-cdn-profile.name
+  location              = azurerm_cdn_profile.crcdev-cdn-profile.location
+  resource_group_name   = azurerm_resource_group.crcdev-rg.name
+  origin {
+    name        = "devresume"
+    host_name   = "apcrcdevstorage1.z5.web.core.windows.net"
+  }
+  tags = {
+    environment = "dev"
+  }
+}
+
+resource "azurerm_cdn_endpoint_custom_domain" "devresume" {
+  name                  = "devresume-andrewperlas-com"
+  cdn_endpoint_id       = azurerm_cdn_endpoint.crcdev-cdn-endpoint.id
+  host_name             = "devresume.andrewperlas.com"
+  cdn_managed_https {
+    certificate_type = "Dedicated"
+    protocol_type = "ServerNameIndication"
+    tls_version = "TLS12"
+  }
+}
