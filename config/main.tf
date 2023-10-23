@@ -53,6 +53,7 @@ resource "azurerm_cdn_endpoint" "crcdev-cdn-endpoint" {
   profile_name          = azurerm_cdn_profile.crcdev-cdn-profile.name
   location              = azurerm_cdn_profile.crcdev-cdn-profile.location
   resource_group_name   = azurerm_resource_group.crcdev-rg.name
+  origin_host_header    = "apcrcdevstorage1.z5.web.core.windows.net"
   origin {
     name        = "devresume"
     host_name   = "apcrcdevstorage1.z5.web.core.windows.net"
