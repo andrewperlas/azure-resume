@@ -1,3 +1,2 @@
-config/.terraform
-config/terraform.tfstate
-config/terraform.tfstate.backup
+config/*/.terraform
+config/*/*.tfstate*
