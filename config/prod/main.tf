@@ -14,14 +14,15 @@ terraform {
 }
 
 provider "azurerm" {
+  #change alias to reflect environment
+  alias           = "prod"
+  subscription_id = var.subscription
   features {}
 }
 
-data "azurerm_subscription" "subscription" {
-  subscription_id = var.subscription
-}
-
 resource "azurerm_resource_group" "resource_group" {
+  #change provider to reflect provider alias
+  provider = azurerm.prod
   name     = var.rg_name
   location = var.location
   tags = {
@@ -30,6 +31,7 @@ resource "azurerm_resource_group" "resource_group" {
 }
 
 resource "azurerm_storage_account" "storage_account" {
+  provider                 = azurerm.prod
   name                     = var.storage_name
   resource_group_name      = azurerm_resource_group.resource_group.name
   location                 = azurerm_resource_group.resource_group.location
@@ -45,12 +47,14 @@ resource "azurerm_storage_account" "storage_account" {
 }
 
 resource "azurerm_storage_container" "storage_container" {
+  provider              = azurerm.prod
   name                  = var.container_name
   storage_account_name  = azurerm_storage_account.storage_account.name
   container_access_type = "private"
 }
 
 resource "azurerm_cdn_profile" "cdn_profile" {
+  provider            = azurerm.prod
   name                = var.cdnprofile_name
   location            = "West US"
   resource_group_name = var.rg_name
@@ -61,6 +65,7 @@ resource "azurerm_cdn_profile" "cdn_profile" {
 }
 
 resource "azurerm_cdn_endpoint" "cdn_endpoint" {
+  provider            = azurerm.prod
   name                = var.cdnendpoint_name
   profile_name        = azurerm_cdn_profile.cdn_profile.name
   location            = azurerm_cdn_profile.cdn_profile.location
@@ -76,6 +81,7 @@ resource "azurerm_cdn_endpoint" "cdn_endpoint" {
 }
 
 resource "azurerm_cdn_endpoint_custom_domain" "endpoint_custom_domain" {
+  provider        = azurerm.prod
   name            = var.cdncustomdomain_name
   cdn_endpoint_id = azurerm_cdn_endpoint.cdn_endpoint.id
   host_name       = var.cdncustomdomain_hostname
