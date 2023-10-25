@@ -43,3 +43,8 @@ variable "cdncustomdomain_hostname" {
   description = "CDN Custom Domain URL"
   type        = string
 }
+
+variable "environment_tag" {
+  description = "Environment tag"
+  type        = string
+}
