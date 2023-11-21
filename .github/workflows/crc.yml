@@ -1,0 +1,15 @@
+name: Upload To Azure Blob Storage
+on:
+  push:
+    branches:
+      - main
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/ga_push_to_azure@main
+        with:
+          source_dir: "web"
+          container_name: "$web"
+          account_name: "apcrcdevstorage1"
+          overwrite: "true"
