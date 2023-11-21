@@ -1,16 +1,31 @@
-name: Upload To Azure Blob Storage
+name: Blob storage website CI
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+
 jobs:
-  upload:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: andrewperlas/azure-resume@main
+      - uses: actions/checkout@v3
+      - uses: azure/login@v1
         with:
-          source_dir: "web"
-          container_name: "$web"
-          account_name: "apcrcdevstorage1"
-          overwrite: "true"
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch --account-name apcrcdevstorage1 --auth-mode key -d '$web' -s .
+      - name: Purge CDN endpoint
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az cdn endpoint purge --content-paths  "/*" --profile-name "crcdevcdnprofile1" --name "crcdevcdnendpoint1" --resource-group "crcdev-rg"
+
+      # Azure logout
+      - name: logout
+        run: |
+          az logout
+        if: always()
